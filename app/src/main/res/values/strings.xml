@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">tagarino-HabitTracker</string>
+
+    <string name="habit_text_view">Habit</string>
+    <string name="tacker_text_view">Tracker</string>
+    <string name="view_habits_button_text">VIEW HABITS</string>
+
+    <string name="completed_habits">Completed Habits</string>
+    <string name="add_habit">Add Habit</string>
+</resources>
