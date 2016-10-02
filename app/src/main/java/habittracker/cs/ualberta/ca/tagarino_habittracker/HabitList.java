@@ -16,9 +16,11 @@ import java.util.Collection;
 public class HabitList {
 
     protected ArrayList<Habit> habitList;
+    protected ArrayList<Listener> listeners;
 
     public HabitList(){
         habitList = new ArrayList<Habit>();
+        listeners = new ArrayList<Listener>();
     }
 
     public Collection<Habit> getHabits() {
@@ -27,9 +29,30 @@ public class HabitList {
 
     public void addHabit(Habit newHabit) {
         habitList.add(newHabit);
+        notifyListeners();
     }
 
     public void deleteHabit(Habit habit) {
         habitList.remove(habit);
     }
+
+    public int size() {
+        return habitList.size();
+    }
+
+    public boolean contains(Habit habit) {
+        return habitList.contains(habit);
+    }
+
+    private void notifyListeners() {
+        for (Listener listener : listeners) {
+            listener.update();
+        }
+    }
+
+    public void addListener(Listener l) {
+        listeners.add(l);
+    }
+
+    public void removeListener(Listener l) { listeners.remove(l); }
 }

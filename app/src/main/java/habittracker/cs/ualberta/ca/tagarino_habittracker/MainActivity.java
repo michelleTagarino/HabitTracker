@@ -21,7 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
         Button viewHabitsButton = (Button) findViewById(R.id.viewHabitsButton);
         viewHabitsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) { setResult(RESULT_OK); }
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+                Toast.makeText(MainActivity.this,"View Habits",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this,HabitListActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
@@ -38,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 /*
-    public void editHabits(MenuItem menuItem){
-        Toast.makeText(this,"Edit Habits",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this,)
+    public void editHabits(MenuItem menuItem) {
+        Toast.makeText(this, "Edit Habits", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, )
         startActivity(intent);
-    */
+    }
+*/
 }

@@ -38,6 +38,8 @@ public abstract class Habit {
 
     public abstract Boolean isComplete();
 
+    public String toString() { return getName().toString(); }
+
     public String getName() {
         return this.name;
     }
