@@ -1,5 +1,6 @@
 package habittracker.cs.ualberta.ca.tagarino_habittracker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,50 +18,43 @@ public abstract class Habit {
 
     protected String name;
     protected Date date;
-    protected String weekday;
+    protected ArrayList<String> weekday;
     protected int count;
 
     public Habit(String nameArg) {
         this.name = nameArg;
         this.date = new Date();
-        this.weekday = "Sunday";
+        this.weekday.add("Sunday");
         this.count = 0;
     }
 
-    public Habit(String nameArg, String weekdayArg) {
+    public Habit(String nameArg, ArrayList<String> weekdayArg) {
         this.name = nameArg;
         this.date = new Date();
         this.weekday = weekdayArg;
         this.count = 0;
     }
 
-    //public abstract String getWeekday();
-
     public abstract Boolean isComplete();
 
-    public String toString() { return getName().toString(); }
+    public String toString() {
+        return getName().toString();
+    }
 
     public String getName() {
         return this.name;
     }
 
-    public String getWeekday() {
+    public Date getDate() {
+        return this.date;
+    }
+
+    public ArrayList<String> getWeekday() {
         return this.weekday;
     }
 
-    public int getCountCompleted(){ return this.count; }
-
-
-    /*
-    public int getWeekday(){
-        Date currentDate = getDate();
-
-        //Code referenced from https://docs.oracle.com/javase/7/docs/api/java/util/Calendar.html Sept. 12, 2016
-        Calendar calendarObject = Calendar.getInstance();
-        calendarObject.setTime(currentDate);
-        this.weekday = calendarObject.get(Calendar.DAY_OF_WEEK); //1 is Sunday...Saturday is 7
-
-        return this.weekday;
+    public int getCountCompleted() {
+        return this.count;
     }
-    */
+
 }

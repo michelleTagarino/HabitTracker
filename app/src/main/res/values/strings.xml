@@ -8,4 +8,6 @@
 
     <string name="completed_habits">Completed Habits</string>
     <string name="add_habit">Edit Habits</string>
+
+    <string name="habit_weekday">Choose Days to Complete Habit</string>
 </resources>

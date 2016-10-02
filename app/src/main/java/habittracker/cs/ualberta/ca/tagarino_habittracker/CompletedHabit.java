@@ -1,5 +1,7 @@
 package habittracker.cs.ualberta.ca.tagarino_habittracker;
 
+import java.util.ArrayList;
+
 /**
  * Created by michelletagarino on 16-10-01.
  */
@@ -11,7 +13,7 @@ public class CompletedHabit extends Habit {
         super(nameArg);
         count = COUNT_COMPLETED;
     }
-    public CompletedHabit(String nameArg,String weekdayArg){
+    public CompletedHabit(String nameArg, ArrayList<String> weekdayArg){
         super(nameArg,weekdayArg);
         count = COUNT_COMPLETED;
     }

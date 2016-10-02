@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:id="@+id/habitsListView"
         android:textColor="#f86b14"
-        android:background="#ffffff"
         android:clickable="true"
         android:fastScrollEnabled="true"
         android:smoothScrollbar="true" />
