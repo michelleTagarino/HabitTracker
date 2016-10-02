@@ -22,23 +22,36 @@ public class HabitListActivity extends MainActivity {
         setContentView(R.layout.habits_list);
         ListView listView = (ListView) findViewById(R.id.habitsListView);
         Collection<Habit> habits = HabitListController.getHabitList().getHabits();
-        ArrayList<Habit> list = new ArrayList<Habit>();
+        final ArrayList<Habit> list = new ArrayList<Habit>(habits);
         final ArrayAdapter<Habit> habitAdapter = new ArrayAdapter<Habit>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(habitAdapter);
 
+        HabitListController.getHabitList().addListener(new Listener() {
+            @Override
+            public void update() {
+                list.clear();
+                Collection<Habit> habits = HabitListController.getHabitList().getHabits();
+                list.addAll(habits);
+                habitAdapter.notifyDataSetChanged();
+            }
+        });
 
+        
+
+/*
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setResult(RESULT_OK);
                 String text = bodyText.getText().toString();
-                Habit newHabit = new IncompletedHabit(text);
+
             }
         });
+        */
     }
 
     public void addHabitAction(View v) {
-        //Toast.makeText(this, "Adding a habit.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Adding a habit.", Toast.LENGTH_SHORT).show();
         HabitListController habitListController = new HabitListController();
         EditText textView = (EditText) findViewById(R.id.addHabitNameText);
         habitListController.addHabit(new IncompletedHabit(textView.getText().toString()));

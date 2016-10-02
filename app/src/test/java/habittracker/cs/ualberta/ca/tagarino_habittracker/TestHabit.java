@@ -41,4 +41,20 @@ public class TestHabit {
         int completedCount = completedHabit.getCountCompleted();
         assertEquals(completedCount,1);
     }
+
+    // The next two methods test to see if the Habit Name entered
+    // was the string the user entered and not arbitrary 'garbage'
+    @Test
+    public void testHabitName() {
+        String habitName = "Let's rap like Drake.";
+        Habit habit = new IncompletedHabit(habitName);
+        assertTrue("Habit Name is not equal", habitName.equals(habit.getName()));
+    }
+
+    @Test
+    public void testHabitNameToString() {
+        String habitName = "Let's rap like Drake.";
+        Habit habit = new IncompletedHabit(habitName);
+        assertTrue("Habit Name.toString is not equal", habitName.toString().equals(habit.getName()));
+    }
 }

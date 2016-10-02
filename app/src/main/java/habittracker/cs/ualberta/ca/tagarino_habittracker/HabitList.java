@@ -27,6 +27,12 @@ public class HabitList {
         return habitList;
     }
 
+    private void notifyListeners() {
+        for (Listener listener : listeners) {
+            listener.update();
+        }
+    }
+
     public void addHabit(Habit newHabit) {
         habitList.add(newHabit);
         notifyListeners();
@@ -42,12 +48,6 @@ public class HabitList {
 
     public boolean contains(Habit habit) {
         return habitList.contains(habit);
-    }
-
-    private void notifyListeners() {
-        for (Listener listener : listeners) {
-            listener.update();
-        }
     }
 
     public void addListener(Listener l) {
