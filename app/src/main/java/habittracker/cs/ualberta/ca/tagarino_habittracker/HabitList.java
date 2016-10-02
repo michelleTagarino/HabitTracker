@@ -40,6 +40,7 @@ public class HabitList {
 
     public void deleteHabit(Habit habit) {
         habitList.remove(habit);
+        notifyListeners();
     }
 
     public int size() {

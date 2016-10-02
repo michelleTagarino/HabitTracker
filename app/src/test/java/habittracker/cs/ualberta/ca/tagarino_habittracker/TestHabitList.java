@@ -53,8 +53,12 @@ public class TestHabitList {
             }
         };
         habitList.addListener(l);
-        habitList.addHabit(new IncompletedHabit("Sleep all day and never wake up."));
-        assertTrue("HabitList is not updating...",this.updated);
+        Habit testHabit = new IncompletedHabit("Sleep all day and never wake up.");
+        habitList.addHabit(testHabit);
+        assertTrue("HabitList is not updating...", this.updated);
+        updated = false;
+        habitList.deleteHabit(testHabit);
+        assertTrue("HabitList is still not updating...", this.updated);
     }
 
     @Test

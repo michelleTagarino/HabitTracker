@@ -3,6 +3,7 @@ package habittracker.cs.ualberta.ca.tagarino_habittracker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +37,17 @@ public class HabitListActivity extends MainActivity {
             }
         });
 
-        
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Toast.makeText(HabitListActivity.this,
+                        "Delete "+list.get(position).toString(),
+                        Toast.LENGTH_SHORT).show();
+                Habit habit = list.get(position);
+                HabitListController.getHabitList().deleteHabit(habit);
+                return false;
+            }
+        });
 
 /*
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
