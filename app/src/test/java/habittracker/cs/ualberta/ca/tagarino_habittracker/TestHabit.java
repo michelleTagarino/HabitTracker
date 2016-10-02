@@ -1,6 +1,9 @@
 package habittracker.cs.ualberta.ca.tagarino_habittracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**
@@ -10,36 +13,29 @@ public class TestHabit {
 
     @Test
     public void getNameTest() {
-        String incompletedHabitName = "Shake a twig.";
-        Habit incompletedHabit = new IncompletedHabit("Shake a twig.");
-        assertTrue(incompletedHabitName.equals(incompletedHabit.getName()));
-
-        String completedHabitName = "Play with sloths.";
-        Habit completedHabit = new CompletedHabit("Play with sloths.");
-        assertTrue(completedHabitName.equals(completedHabit.getName()));
+        String habitName = "Shake a twig.";
+        Habit habit = new Habit("Shake a twig.");
+        assertTrue(habitName.equals(habit.getName()));
     }
 
     @Test
     public void getWeekdayTest() {
-        String incompletedWeekday = "Tuesday";
-        Habit incompletedHabit = new IncompletedHabit("Drink fire","Tuesday");
-        assertTrue(incompletedWeekday.equals(incompletedHabit.getWeekday()));
-
-        String completedWeekday = "Tuesday";
-        Habit completedHabit = new CompletedHabit("Drink fire","Tuesday");
-        assertTrue(completedWeekday.equals(completedHabit.getWeekday()));
+        ArrayList<String> weekday = new ArrayList<>();
+        weekday.add("Tuesday");
+        Habit habit = new Habit("Drink fire",weekday);
+        assertTrue(weekday.equals(habit.getWeekday()));
     }
 
     //Tests to see if a habit has the correct amount of times it was completed
     @Test
     public void getCountTest() {
-        Habit incompletedHabit = new IncompletedHabit("Eat bread and nap.");
-        int incompletedCount = incompletedHabit.getCountCompleted();
-        assertEquals(incompletedCount,0);
+        Habit habit = new Habit("Eat bread and nap.");
+        int count = habit.getCountCompleted();
+        assertEquals(count,0);
 
-        Habit completedHabit = new CompletedHabit("Eat bread and nap forevermore.");
-        int completedCount = completedHabit.getCountCompleted();
-        assertEquals(completedCount,1);
+        habit.incrementCountCompleted();
+        count = habit.getCountCompleted();
+        assertEquals(count,1);
     }
 
     // The next two methods test to see if the Habit Name entered
@@ -47,14 +43,14 @@ public class TestHabit {
     @Test
     public void testHabitName() {
         String habitName = "Let's rap like Drake.";
-        Habit habit = new IncompletedHabit(habitName);
+        Habit habit = new Habit(habitName);
         assertTrue("Habit Name is not equal", habitName.equals(habit.getName()));
     }
 
     @Test
     public void testHabitNameToString() {
         String habitName = "Let's rap like Drake.";
-        Habit habit = new IncompletedHabit(habitName);
+        Habit habit = new Habit(habitName);
         assertTrue("Habit Name.toString is not equal", habitName.toString().equals(habit.getName()));
     }
 }

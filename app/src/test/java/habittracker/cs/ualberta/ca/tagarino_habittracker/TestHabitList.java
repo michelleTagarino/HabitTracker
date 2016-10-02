@@ -21,7 +21,7 @@ public class TestHabitList {
     public void addHabitListTest() {
         HabitList habitList = new HabitList();
         String habit = "Eat all the donuts.";
-        Habit testHabit = new IncompletedHabit(habit);
+        Habit testHabit = new Habit(habit);
         habitList.addHabit(testHabit);
         assertTrue("Habit List Size",habitList.size() == 1);
         assertTrue("Test habit contained", habitList.contains(testHabit));
@@ -32,7 +32,7 @@ public class TestHabitList {
 
         HabitList habitList = new HabitList();
         String habit = "Eat all the donuts.";
-        Habit testHabit = new IncompletedHabit(habit);
+        Habit testHabit = new Habit(habit);
         habitList.addHabit(testHabit);
         assertTrue("Habit List Size",habitList.size() == 1);
         assertTrue(habitList.contains(testHabit));
@@ -53,7 +53,7 @@ public class TestHabitList {
             }
         };
         habitList.addListener(l);
-        Habit testHabit = new IncompletedHabit("Sleep all day and never wake up.");
+        Habit testHabit = new Habit("Sleep all day and never wake up.");
         habitList.addHabit(testHabit);
         assertTrue("HabitList is not updating...", this.updated);
         updated = false;
@@ -72,34 +72,7 @@ public class TestHabitList {
         };
         habitList.addListener(l);
         habitList.removeListener(l);
-        habitList.addHabit(new IncompletedHabit("Sleep all day and never wake up."));
+        habitList.addHabit(new Habit("Sleep all day and never wake up."));
         assertFalse("HabitList is not updating...", this.updated);
-
     }
-
-
-
-
-
-/*
-    @Test
-    public void chooseHabitListTest() {
-        HabitList habitList = new HabitList();
-        String habit = "Eat all the donuts.";
-        Habit testHabit = new IncompletedHabit(habit);
-        habitList.addHabit(testHabit);
-
-        //Testing for 1 habit
-        for (int i = 0; i < 10; i++) {
-            Habit habits = habitList.chooseHabit();
-            assertTrue("Student is not null", habit != null);
-            assertTrue("Didn't choose the habit intended.", habits.equals(testHabit));
-        }
-
-        String habit2 = "Relish in a food coma.";
-        Habit testHabit2 = new IncompletedHabit(habit2);
-        habitList.addHabit(testHabit2);
-
-    }
-*/
 }

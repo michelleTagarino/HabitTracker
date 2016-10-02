@@ -14,7 +14,7 @@ public class HabitListController {
         return habitList;
     }
 
-    public void addHabit(IncompletedHabit habit) {
+    public void addHabit(Habit habit) {
         getHabitList().addHabit(habit);
     }
 }

@@ -14,11 +14,11 @@ There are different types of habits, Incompleted, Completed, Important,
 and Reminder, that will be extended from this class, hence why it is abstract.
 */
 
-public abstract class Habit {
+public class Habit {
 
     protected String name;
     protected Date date;
-    protected ArrayList<String> weekday;
+    protected ArrayList<String> weekday = new ArrayList<>();
     protected int count;
 
     public Habit(String nameArg) {
@@ -35,7 +35,10 @@ public abstract class Habit {
         this.count = 0;
     }
 
-    public abstract Boolean isComplete();
+    public Boolean isComplete() {
+        if (count == 0) return Boolean.FALSE;
+        else return Boolean.TRUE;
+    }
 
     public String toString() {
         return getName().toString();
@@ -56,5 +59,7 @@ public abstract class Habit {
     public int getCountCompleted() {
         return this.count;
     }
+
+    public void incrementCountCompleted() { count++; }
 
 }

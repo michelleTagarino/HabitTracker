@@ -20,6 +20,7 @@ public class HabitListActivity extends MainActivity {
 
     private ArrayList<String> weekdayList;
     final String[] weekdayItems = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    String adbMessage = "Choose MORE... to Complete Habit";
     String habitInfo = null;
 
     @Override
@@ -53,7 +54,7 @@ public class HabitListActivity extends MainActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
                 AlertDialog.Builder adb = new AlertDialog.Builder(HabitListActivity.this);
-                adb.setMessage("Delete "+list.get(position).toString()+"?");
+                adb.setMessage(adbMessage);
                 adb.setCancelable(true);
                 final int finalPosition = position;
 
@@ -85,16 +86,14 @@ public class HabitListActivity extends MainActivity {
 
                         Date habitDate = habit.getDate();
 
-                        // The next two lines of code taken from:
-                        // http://stackoverflow.com/questions/4772425/change-date-format-in-a-java-string
+                        // The next two lines of code were referenced from:
+                        // https://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html
                         // on September 30, 2016
-                        //String strCurrentDate = "Wed, 18 Apr 2012";
-
                         SimpleDateFormat formatter;
                         formatter = new SimpleDateFormat("yyyy-MM-dd");
                         String strDate = formatter.format(habitDate);
 
-                        // Separate the string array into a comma separated string
+                        // Convert the string array into a comma separated string
                         String habitDay  = habit.getWeekday().toString();
                         String regex = "\\[|\\]";
                         String strHabitDay = habitDay.replaceAll(regex,"").replaceAll(",",", ");
@@ -108,9 +107,17 @@ public class HabitListActivity extends MainActivity {
 
                         adb.setMessage(habitInfo);
                         adb.setCancelable(true);
-                        adb.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                        adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {}
+                        });
+                        adb.setPositiveButton("Complete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Habit habit = list.get(finalPosition);
+                                habit.incrementCountCompleted();
+
+                            }
                         });
                         adb.show();
                     }
@@ -146,7 +153,7 @@ public class HabitListActivity extends MainActivity {
         }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                habitListController.addHabit(new IncompletedHabit(textView.getText().toString(), weekdayList));
+                habitListController.addHabit(new Habit(textView.getText().toString(), weekdayList));
             }
         }).create();
         adb.show();
