@@ -116,7 +116,6 @@ public class HabitListActivity extends MainActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 Habit habit = list.get(finalPosition);
                                 habit.incrementCountCompleted();
-
                             }
                         });
                         adb.show();
