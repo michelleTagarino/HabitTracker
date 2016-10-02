@@ -15,8 +15,9 @@
         android:textIsSelectable="false"
         android:textColor="#ffffff"
         android:typeface="monospace"
-        android:layout_above="@+id/trackerTitle"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/viewHabitsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,9 +28,8 @@
         android:textSize="78dp"
         android:textStyle="bold"
         android:typeface="monospace"
-        android:layout_marginBottom="70dp"
         android:layout_above="@+id/viewHabitsButton"
-        android:layout_alignStart="@+id/habitTitle" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"

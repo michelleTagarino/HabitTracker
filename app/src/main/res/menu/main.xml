@@ -23,8 +23,8 @@
         android:title="@string/completed_habits"
         android:onClick="completedHabits" />
 
-    <item android:id="@+id/add_habit"
+<!--    <item android:id="@+id/add_habit"
         app:showAsAction="never"
         android:title="@string/add_habit"
-        android:onClick="addHabit" />
+        android:onClick="addHabit" />-->
 </menu>

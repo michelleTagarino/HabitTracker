@@ -12,31 +12,11 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="454dp"
+        android:layout_height="match_parent"
         android:id="@+id/habitsListView"
         android:textColor="#f86b14"
         android:background="#ffffff"
         android:clickable="true"
         android:fastScrollEnabled="true"
         android:smoothScrollbar="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/addHabitText"
-        android:layout_weight="0.88"
-        android:background="#ffffff"
-        android:autoText="false"
-        android:textColor="#000000" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ADD HABIT"
-        android:id="@+id/addHabitButton"
-        android:background="#ffffff"
-        android:textColor="#75cfe5"
-        android:clickable="true" />
-
 </LinearLayout>

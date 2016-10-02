@@ -12,11 +12,4 @@ public class HabitListActivity extends AppCompatActivity {
         setContentView(R.layout.habits_list);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Inflating the menu adds one item to the app bar
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
 }

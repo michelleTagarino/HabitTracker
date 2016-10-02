@@ -37,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this,CompletedHabitsActivity.class);
         startActivity(intent);
     }
-
-    public void addHabit(MenuItem menuItem){
-        Toast.makeText(this,"Add Habit",Toast.LENGTH_SHORT).show();
-    }
+/*
+    public void editHabits(MenuItem menuItem){
+        Toast.makeText(this,"Edit Habits",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this,)
+        startActivity(intent);
+    */
 }

@@ -15,29 +15,39 @@ and Reminder, that will be extended from this class, hence why it is abstract.
 
 public abstract class Habit {
 
-    private String name;
-    private Date date;
-    private String weekday;
+    protected String name;
+    protected Date date;
+    protected String weekday;
+    protected int count;
+
+    public Habit(String nameArg) {
+        this.name = nameArg;
+        this.date = new Date();
+        this.weekday = "Sunday";
+        this.count = 0;
+    }
 
     public Habit(String nameArg, String weekdayArg) {
         this.name = nameArg;
         this.date = new Date();
         this.weekday = weekdayArg;
+        this.count = 0;
     }
 
-    public Habit(String nameArg) {
-        this.name = nameArg;
-        this.date = new Date();
-        this.weekday = "Undecided";
-    }
-
-    public abstract String getWeekday();
+    //public abstract String getWeekday();
 
     public abstract Boolean isComplete();
 
-    public abstract Boolean isImportant();
+    public String getName() {
+        return this.name;
+    }
 
-    public Date getDate(){ return date; }
+    public String getWeekday() {
+        return this.weekday;
+    }
+
+    public int getCountCompleted(){ return this.count; }
+
 
     /*
     public int getWeekday(){
