@@ -7,6 +7,12 @@ import java.util.Collection;
  *  CREATED BY MICHELLE TAGARINO on 16-09-29. *
  **********************************************/
 
+/*
+This class will hold all the completed habits (habit with completed counts > 0).
+This class will be used by the CompletedHabitsActivity class and CompletedHabitsController
+class to display as an ArrayAdapter to the user.
+*/
+
 public class CompletedHabits {
 
     protected ArrayList<Habit> habitList;

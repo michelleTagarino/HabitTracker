@@ -31,6 +31,16 @@ import android.view.View;
 
 import android.widget.Button;
 
+/**********************************************
+ *  CREATED BY MICHELLE TAGARINO on 16-09-08. *
+ **********************************************/
+
+/*
+This class displays the home screen of the app. The user may press the
+VIEW HABITS button at the bottom to view a list of all incompleted and
+completed habits.
+*/
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -50,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Create app bar at the top
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -57,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // Add menu item
     public void completedHabits(MenuItem menuItem){
-
         Intent intent = new Intent(MainActivity.this,CompletedHabitsActivity.class);
         startActivity(intent);
     }

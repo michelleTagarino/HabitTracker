@@ -13,6 +13,12 @@ import java.util.Collection;
  *  CREATED BY MICHELLE TAGARINO on 16-09-29. *
  **********************************************/
 
+/*
+This class will hold all the incompleted habits (habit with completed counts equalling 0).
+This class will be used by the HabitListActivity class and HabitListController
+class to display as an ArrayAdapter to the user.
+*/
+
 public class HabitList {
 
     protected ArrayList<Habit> habitList;

@@ -31,9 +31,16 @@ import java.util.Date;
  *  CREATED BY MICHELLE TAGARINO on 16-09-29. *
  **********************************************/
 
+/*
+The purpose of this class is to display Habit instances in a HabitList instance
+by use of an ArrayAdapter. The user may long click on an item to access the habit's options,
+where they will be able choose whether to delete the habit, or complete the habit when
+they press the 'More...' button.
+*/
+
 public class HabitListActivity extends MainActivity {
 
-    //private static final String FILENAME = "file.sav";
+    private static final String FILENAME = "file.sav";
 
     private ListView listView;
     private ArrayList<Habit> list;
@@ -57,7 +64,7 @@ public class HabitListActivity extends MainActivity {
 
         list = new ArrayList<>(habits);
 
-        habitAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        habitAdapter = new ArrayAdapter<>(HabitListActivity.this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(habitAdapter);
 
@@ -71,6 +78,25 @@ public class HabitListActivity extends MainActivity {
                 habitAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+
+        //loadFromFile();
+
+        habitAdapter = new ArrayAdapter<>(HabitListActivity.this, android.R.layout.simple_list_item_1, list);
+
+        listView.setAdapter(habitAdapter);
+        habitAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
 
         // When one of the habit items in the array adapter is clicked for a long time,
         // a dialog box will appear and provide the user the option to delete or view
@@ -155,7 +181,19 @@ public class HabitListActivity extends MainActivity {
             }
         });
     }
-/*
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveInFile();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveInFile();
+    }
+
     // Code referenced from LonelyTwitter application:
     // (https://github.com/sensible-heart/lonelyTwitter) on Sept. 28, 2016
     private void loadFromFile() {
@@ -163,11 +201,17 @@ public class HabitListActivity extends MainActivity {
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 
+            ArrayList<Habit> newList = new ArrayList<>();
+
             Gson gson = new Gson();
 
             //Code taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt Sept.22,2016
             Type listType = new TypeToken<ArrayList<Habit>>() {}.getType();
-            list = gson.fromJson(in, listType);
+            newList.clear();
+            newList = gson.fromJson(in, listType);
+
+            list.clear();
+            list.addAll(newList);
 
         } catch (FileNotFoundException e) {
             list = new ArrayList<>();
@@ -197,7 +241,7 @@ public class HabitListActivity extends MainActivity {
             throw new RuntimeException();
         }
     }
-*/
+
     // Clear text in EditText item automatically
     public void clearEditText(View v) {
         final EditText textView = (EditText) findViewById(R.id.addHabitNameText);
