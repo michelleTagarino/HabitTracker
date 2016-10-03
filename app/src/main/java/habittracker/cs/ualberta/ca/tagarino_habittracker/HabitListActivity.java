@@ -11,12 +11,30 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
 public class HabitListActivity extends MainActivity {
+
+    //private static final String FILENAME = "file.sav";
+
+    private ListView listView;
+    private ArrayList<Habit> list;
+    private ArrayAdapter<Habit> habitAdapter;
+    private Collection<Habit> habits;
 
     private ArrayList<String> weekdayList;
     final String[] weekdayItems = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
@@ -29,13 +47,13 @@ public class HabitListActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habits_list);
 
-        ListView listView = (ListView) findViewById(R.id.habitsListView);
+        listView = (ListView) findViewById(R.id.habitsListView);
 
-        Collection<Habit> habits = HabitListController.getHabitList().getHabits();
+        habits = HabitListController.getHabitList().getHabits();
 
-        final ArrayList<Habit> list = new ArrayList<Habit>(habits);
+        list = new ArrayList<>(habits);
 
-        final ArrayAdapter<Habit> habitAdapter = new ArrayAdapter<Habit>(this, android.R.layout.simple_list_item_1, list);
+        habitAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(habitAdapter);
 
@@ -49,6 +67,10 @@ public class HabitListActivity extends MainActivity {
             }
         });
 
+        // When one of the habit items in the array adapter is clicked for a long time,
+        // a dialog box will appear and provide the user the option to delete or view
+        // the habit details (Name of habit, Date created, Weekday(s) for completion, and Times completed.
+        // Of course the user has the option to exit this dialog box without cause by clicking Cancel.
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -79,7 +101,7 @@ public class HabitListActivity extends MainActivity {
 
                         AlertDialog.Builder adb = new AlertDialog.Builder(HabitListActivity.this);
 
-                        //save the object's (habit's) information --> (name, date, weekday, completionStatus)
+                        // Save the habit's information --> (Name, Date, Weekday, Times completed)
                         Habit habit = list.get(finalPosition);
 
                         String habitName = habit.getName();
@@ -101,21 +123,24 @@ public class HabitListActivity extends MainActivity {
                         int habitCount   = habit.getCountCompleted();
 
                         habitInfo = "Habit Name: "+habitName
-                                + "\n\nDate Rendered: "+strDate
+                                + "\n\nDate Created: "+strDate
                                 + "\n\nDay(s) to Complete:\n"+strHabitDay
                                 + "\n\nTimes Completed: "+habitCount;
 
                         adb.setMessage(habitInfo);
+
                         adb.setCancelable(true);
+
                         adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {}
                         });
+
                         adb.setPositiveButton("Complete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Habit habit = list.get(finalPosition);
-                                habit.incrementCountCompleted();
+                                habit.incrementCountCompleted(); // Increment the times the habit was completed
                             }
                         });
                         adb.show();
@@ -126,29 +151,74 @@ public class HabitListActivity extends MainActivity {
             }
         });
     }
+/*
+    // Code referenced from LonelyTwitter application:
+    // (https://github.com/sensible-heart/lonelyTwitter) on Sept. 28, 2016
+    private void loadFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 
-    public void clearEditText(View v) {
-        final EditText textView = (EditText) findViewById(R.id.addHabitNameText);
-        textView.setText(null); // Clear text in EditText item automatically
+            Gson gson = new Gson();
+
+            //Code taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt Sept.22,2016
+            Type listType = new TypeToken<ArrayList<Habit>>() {}.getType();
+            list = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            list = new ArrayList<>();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
     }
 
+    // Code referenced from LonelyTwitter application:
+    // (https://github.com/sensible-heart/lonelyTwitter) on Sept. 28, 2016
+    private void saveInFile() {
+        try {
+            list.clear();
+            Collection<Habit> habits = HabitListController.getHabitList().getHabits();
+            list.addAll(habits);
 
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(list, writer);
+            writer.flush();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException();
+
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
+*/
+    // Clear text in EditText item automatically
+    public void clearEditText(View v) {
+        final EditText textView = (EditText) findViewById(R.id.addHabitNameText);
+        textView.setText(null);
+    }
+
+    // When the Add Habit button is invoked:
+    // A HabitListController is created; this will allow the ability to control the items in the HabitList
     public void addHabitAction(View v) {
-        //Toast.makeText(this, "Adding a habit.", Toast.LENGTH_SHORT).show();
+
         final HabitListController habitListController = new HabitListController();
-        final CompletedHabitsController completedHabitsController = new CompletedHabitsController();
+
         final EditText textView = (EditText) findViewById(R.id.addHabitNameText);
 
-        weekdayList = new ArrayList<>();
+        weekdayList = new ArrayList<>(); // Will hold the weekdays the habit should be completed
+
         AlertDialog.Builder adb = new AlertDialog.Builder(HabitListActivity.this);
+
+        // Code referenced from https://developer.android.com/guide/topics/ui/dialogs.html on Oct. 1, 2016
         adb.setTitle(R.string.habit_weekday).setMultiChoiceItems(weekdayItems, null, new DialogInterface.OnMultiChoiceClickListener() {
 
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 if (isChecked) {
-                    // If the user checked the item, add it to the selected items
                     weekdayList.add(weekdayItems[which]);
                 } else if (weekdayList.contains(weekdayItems[which])) {
-                    // Else, if the item is already in the array, remove it
                     weekdayList.remove(weekdayItems[which]);
                 }
             }

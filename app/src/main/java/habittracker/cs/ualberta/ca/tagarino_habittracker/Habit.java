@@ -36,7 +36,7 @@ public class Habit {
     }
 
     public Boolean isComplete() {
-        if (count == 0) return Boolean.FALSE;
+        if (this.count == 0) return Boolean.FALSE;
         else return Boolean.TRUE;
     }
 

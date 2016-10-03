@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void completedHabits(MenuItem menuItem){
-        //Toast.makeText(this,"Completed Habits",Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(MainActivity.this,CompletedHabitsActivity.class);
         startActivity(intent);
     }

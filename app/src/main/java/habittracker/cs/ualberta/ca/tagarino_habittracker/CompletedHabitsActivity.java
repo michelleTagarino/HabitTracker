@@ -18,6 +18,8 @@ import java.util.Date;
 
 public class CompletedHabitsActivity extends MainActivity {
 
+    ArrayList<Habit> list;
+    ArrayAdapter<Habit> habitAdapter;
     private String habitInfo = null;
 
     @Override
@@ -30,17 +32,19 @@ public class CompletedHabitsActivity extends MainActivity {
 
         Collection<Habit> habits = HabitListController.getHabitList().getHabits();
 
-        final ArrayList<Habit> list = new ArrayList<>(habits);
+        list = new ArrayList<>(habits);
 
         // Go through list to see which habits have been completed
         // If it has NOT been completed yet, remove the habit from the list
-        for (int i = 0; i < list.size()-1; i++) {
-            if (!list.get(i).isComplete()) {
-                list.remove(i);
+        ArrayList<Habit> newList = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isComplete()) {
+                newList.add(list.get(i));
             }
         }
 
-        final ArrayAdapter<Habit> habitAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        habitAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, newList);
 
         listView.setAdapter(habitAdapter);
 
@@ -54,10 +58,15 @@ public class CompletedHabitsActivity extends MainActivity {
             }
         });
 
+        // When a habit item is clicked long, a dialog box appears.
+        // Here, the user can either a delete a habit or complete the habit again.
+        // The dialog box also includes information about the habit, incuding:
+        //          - Habit Name, Date Created, Weekday(s) for Completion, and Times Completed
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
+                // Create a new dialog box for specific habit
                 AlertDialog.Builder adb = new AlertDialog.Builder(CompletedHabitsActivity.this);
 
                 adb.setCancelable(true);
@@ -73,7 +82,7 @@ public class CompletedHabitsActivity extends MainActivity {
                 // The next three lines of code were referenced from:
                 // https://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html
                 // on September 30, 2016
-                SimpleDateFormat formatter,weekFormatter;
+                SimpleDateFormat formatter, weekFormatter;
 
                 formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String strDate = formatter.format(habitDate);
@@ -95,11 +104,15 @@ public class CompletedHabitsActivity extends MainActivity {
                         + "\n\nLast Weekday Completed: " + strWeekday;
 
                 adb.setMessage(habitInfo);
+
                 adb.setCancelable(true);
+
                 adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {}
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
                 });
+
                 adb.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -108,6 +121,7 @@ public class CompletedHabitsActivity extends MainActivity {
                         HabitListController.getHabitList().deleteHabit(habit);
                     }
                 });
+
                 adb.setPositiveButton("Complete Again", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -120,4 +134,62 @@ public class CompletedHabitsActivity extends MainActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+
+
+    }
 }
+/*
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //saveInFile();
+    }
+
+    // Code referenced from LonelyTwitter application:
+    // (https://github.com/sensible-heart/lonelyTwitter) on Sept. 28, 2016
+    private void loadFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+
+            Gson gson = new Gson();
+
+            //Code taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt Sept.22,2016
+            Type listType = new TypeToken<ArrayList<Habit>>() {}.getType();
+            list = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            list = new ArrayList<>();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    // Code referenced from LonelyTwitter application:
+    // (https://github.com/sensible-heart/lonelyTwitter) on Sept. 28, 2016
+    private void saveInFile() {
+        try {
+            list.clear();
+            Collection<Habit> habits = HabitListController.getHabitList().getHabits();
+            list.addAll(habits);
+
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(list, writer);
+            writer.flush();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException();
+
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
+    */
