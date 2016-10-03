@@ -1,3 +1,23 @@
+/*
+    Habit Tracker: Record the statistics of a user's habits and its completions
+
+    Copyright (C) 2016  Michelle Tagarino  tagarino@ualberta.ca
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
+
 package habittracker.cs.ualberta.ca.tagarino_habittracker;
 
 import android.content.Intent;
@@ -10,7 +30,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         Button viewHabitsButton = (Button) findViewById(R.id.viewHabitsButton);
         viewHabitsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 setResult(RESULT_OK);
-                //Toast.makeText(MainActivity.this,"View Habits",Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(MainActivity.this,HabitListActivity.class);
                 startActivity(intent);
             }
@@ -42,11 +62,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this,CompletedHabitsActivity.class);
         startActivity(intent);
     }
-/*
-    public void editHabits(MenuItem menuItem) {
-        Toast.makeText(this, "Edit Habits", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this, )
-        startActivity(intent);
-    }
-*/
 }

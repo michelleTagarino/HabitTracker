@@ -1,0 +1,43 @@
+Habit Tracker:
+——————————————————————
+Author: Michelle Tagarino
+CCID: tagarino
+Assignment #1: tagarino-HabitTracker
+
+
+What is Habit Tracker?
+——————————————————————
+Habit Tracker is an open source application that may be used by a single user at a time
+to record, complete, and track their habits. Habits may be anything that the user does
+in his/her spare time. 
+
+
+How to use it?
+——————————————————————
+The app will prompt the user to view a list of their habits. Here, the user may enter 
+the name of their habit in the text box at the bottom. When they press the ADD HABIT
+button, the app will prompt the user to check the weekdays that the habit may be 
+completed. Each item may be long clicked to provide the option to delete or complete
+the habit. In the app menu bar at the top, the user can view a list of the habits that
+he/she has already completed. Any habit can be completed more than once. The user may
+also delete past habit completions as well.
+
+
+Github Repository URL:
+——————————————————————
+https://github.com/michelleTagarino/as1.git
+
+
+Project Structure
+——————————————————————
+Compile Sdk Version - API 24: Android 7.0 (Nougat)
+Build Tools - Version 24.0.2
+
+Min Sdk Version - API 18: Android 4.3 (Jelly Bean)
+Target Sdk Version - API 18: Android 4.3 (Jelly Bean)
+
+Dependencies:
+    {dir=libs, include=[*.jar]}
+    junit:junit:4.12
+    com.android.support:appcompat-v7:24.2.0
+    com.google.code.gson:gson:2.7

@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+/**********************************************
+ *  CREATED BY MICHELLE TAGARINO on 16-09-29. *
+ **********************************************/
+
 public class CompletedHabitsActivity extends MainActivity {
 
     private ListView listView;

@@ -27,6 +27,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+/**********************************************
+ *  CREATED BY MICHELLE TAGARINO on 16-09-29. *
+ **********************************************/
+
 public class HabitListActivity extends MainActivity {
 
     //private static final String FILENAME = "file.sav";

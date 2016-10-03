@@ -3,9 +3,10 @@ package habittracker.cs.ualberta.ca.tagarino_habittracker;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by michelletagarino on 16-10-02.
- */
+/**********************************************
+ *  CREATED BY MICHELLE TAGARINO on 16-09-29. *
+ **********************************************/
+
 public class CompletedHabits {
 
     protected ArrayList<Habit> habitList;
