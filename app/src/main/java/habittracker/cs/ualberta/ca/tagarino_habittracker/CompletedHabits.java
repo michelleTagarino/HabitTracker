@@ -12,8 +12,8 @@ public class CompletedHabits {
     protected ArrayList<Listener> listeners;
 
     public CompletedHabits(){
-        habitList = new ArrayList<Habit>();
-        listeners = new ArrayList<Listener>();
+        habitList = new ArrayList<>();
+        listeners = new ArrayList<>();
     }
 
     public Collection<Habit> getHabits() {
