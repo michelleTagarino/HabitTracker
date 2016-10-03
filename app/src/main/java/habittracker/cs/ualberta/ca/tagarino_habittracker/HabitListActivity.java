@@ -19,7 +19,7 @@ import java.util.Date;
 public class HabitListActivity extends MainActivity {
 
     private ArrayList<String> weekdayList;
-    final String[] weekdayItems = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    final String[] weekdayItems = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     String adbMessage = "Choose MORE... to Complete Habit";
     String habitInfo = null;
 
@@ -127,9 +127,16 @@ public class HabitListActivity extends MainActivity {
         });
     }
 
+    public void clearEditText(View v) {
+        final EditText textView = (EditText) findViewById(R.id.addHabitNameText);
+        textView.setText(null); // Clear text in EditText item automatically
+    }
+
+
     public void addHabitAction(View v) {
         //Toast.makeText(this, "Adding a habit.", Toast.LENGTH_SHORT).show();
         final HabitListController habitListController = new HabitListController();
+        final CompletedHabitsController completedHabitsController = new CompletedHabitsController();
         final EditText textView = (EditText) findViewById(R.id.addHabitNameText);
 
         weekdayList = new ArrayList<>();
@@ -152,7 +159,8 @@ public class HabitListActivity extends MainActivity {
         }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                habitListController.addHabit(new Habit(textView.getText().toString(), weekdayList));
+                Habit habit = new Habit(textView.getText().toString(), weekdayList);
+                habitListController.addHabit(habit);
             }
         }).create();
         adb.show();

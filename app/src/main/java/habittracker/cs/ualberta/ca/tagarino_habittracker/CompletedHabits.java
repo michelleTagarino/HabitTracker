@@ -8,16 +8,16 @@ import java.util.Collection;
  */
 public class CompletedHabits {
 
-    protected ArrayList<Habit> completedHabits;
+    protected ArrayList<Habit> habitList;
     protected ArrayList<Listener> listeners;
 
     public CompletedHabits(){
-        completedHabits = new ArrayList<Habit>();
+        habitList = new ArrayList<Habit>();
         listeners = new ArrayList<Listener>();
     }
 
     public Collection<Habit> getHabits() {
-        return completedHabits;
+        return habitList;
     }
 
     private void notifyListeners() {
@@ -26,22 +26,22 @@ public class CompletedHabits {
         }
     }
 
-    public void addCompletedHabit(Habit newHabit) {
-        completedHabits.add(newHabit);
+    public void addHabit(Habit newHabit) {
+        habitList.add(newHabit);
         notifyListeners();
     }
 
-    public void deleteCompletedHabit(Habit habit) {
-        completedHabits.remove(habit);
+    public void deleteHabit(Habit habit) {
+        habitList.remove(habit);
         notifyListeners();
     }
 
     public int size() {
-        return completedHabits.size();
+        return habitList.size();
     }
 
     public boolean contains(Habit habit) {
-        return completedHabits.contains(habit);
+        return habitList.contains(habit);
     }
 
     public void addListener(Listener l) {

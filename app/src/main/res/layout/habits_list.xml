@@ -29,7 +29,8 @@
         android:layout_weight="0.36"
         android:textColor="#ffffff"
         android:singleLine="true"
-        android:textCursorDrawable="@null" />
+        android:textCursorDrawable="@null"
+        android:onClick="clearEditText" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

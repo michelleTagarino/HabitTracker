@@ -11,11 +11,12 @@
         android:layout_gravity="right"></LinearLayout>
 
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:id="@+id/habitsListView"
+        android:id="@+id/completedhabitsListView"
         android:textColor="#f86b14"
         android:clickable="true"
         android:fastScrollEnabled="true"
-        android:smoothScrollbar="true" />
+        android:smoothScrollbar="true"
+        android:longClickable="false" />
 </LinearLayout>

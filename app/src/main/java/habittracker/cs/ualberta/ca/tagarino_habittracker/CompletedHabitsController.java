@@ -5,16 +5,16 @@ package habittracker.cs.ualberta.ca.tagarino_habittracker;
  */
 public class CompletedHabitsController {
 
-    private static CompletedHabits completedHabits = null;
+    private static CompletedHabits habitList = null;
 
-    static public CompletedHabits getCompletedHabits() {
-        if (completedHabits == null) {
-            completedHabits = new CompletedHabits();
+    static public CompletedHabits getHabitList() {
+        if (habitList == null) {
+            habitList = new CompletedHabits();
         }
-        return completedHabits;
+        return habitList;
     }
 
     public void addHabit(Habit habit) {
-        getCompletedHabits().addCompletedHabit(habit);
+        getHabitList().addHabit(habit);
     }
 }

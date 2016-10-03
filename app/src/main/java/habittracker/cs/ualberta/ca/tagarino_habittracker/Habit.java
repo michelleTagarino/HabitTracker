@@ -24,7 +24,7 @@ public class Habit {
     public Habit(String nameArg) {
         this.name = nameArg;
         this.date = new Date();
-        this.weekday.add("Sunday");
+        this.weekday.add("Sun");
         this.count = 0;
     }
 
