@@ -206,6 +206,8 @@ public class HabitListActivity extends MainActivity {
 
         final HabitListController habitListController = new HabitListController();
 
+        final CompletedHabitsController completedHabitsController = new CompletedHabitsController();
+
         final EditText textView = (EditText) findViewById(R.id.addHabitNameText);
 
         weekdayList = new ArrayList<>(); // Will hold the weekdays the habit should be completed
@@ -231,6 +233,7 @@ public class HabitListActivity extends MainActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Habit habit = new Habit(textView.getText().toString(), weekdayList);
                 habitListController.addHabit(habit);
+                completedHabitsController.addHabit(habit);
             }
         }).create();
         adb.show();

@@ -32,7 +32,7 @@ public class CompletedHabitsActivity extends MainActivity {
 
         listView = (ListView) findViewById(R.id.completedhabitsListView);
 
-        habits = HabitListController.getHabitList().getHabits();
+        habits = CompletedHabitsController.getHabitList().getHabits();
 
         list = new ArrayList<>(habits);
 
@@ -46,7 +46,10 @@ public class CompletedHabitsActivity extends MainActivity {
             }
         }
 
-        habitAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, newList);
+        list.clear();
+        list.addAll(newList);
+
+        habitAdapter = new ArrayAdapter<>(CompletedHabitsActivity.this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(habitAdapter);
 
