@@ -10,16 +10,17 @@ import java.util.Date;
 
 /*
 The Habit class is meant to model the types of habits of the user.
-There are different types of habits, Incompleted, Completed, Important,
-and Reminder, that will be extended from this class, hence why it is abstract.
+This class is a regular class. All instances of this class have its own attributes
+that include the Habit Name, Habit Date, Weekday for Completion, and Times Completed.
+All new instances obviously have a count of 0 since they have not been completed yet.
 */
 
 public class Habit {
 
-    protected String name;
-    protected Date date;
-    protected ArrayList<String> weekday = new ArrayList<>();
-    protected int count;
+    private String name;
+    private Date date;
+    private ArrayList<String> weekday = new ArrayList<>();
+    private int count;
 
     public Habit(String nameArg) {
         this.name = nameArg;

@@ -37,7 +37,7 @@ public class HabitListActivity extends MainActivity {
     private Collection<Habit> habits;
 
     private ArrayList<String> weekdayList;
-    final String[] weekdayItems = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    private final String[] WEEKDAY_ITEMS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     private String adbMessage = "Choose MORE... to Complete Habit";
     private String habitInfo = null;
 
@@ -215,13 +215,13 @@ public class HabitListActivity extends MainActivity {
         AlertDialog.Builder adb = new AlertDialog.Builder(HabitListActivity.this);
 
         // Code referenced from https://developer.android.com/guide/topics/ui/dialogs.html on Oct. 1, 2016
-        adb.setTitle(R.string.habit_weekday).setMultiChoiceItems(weekdayItems, null, new DialogInterface.OnMultiChoiceClickListener() {
+        adb.setTitle(R.string.habit_weekday).setMultiChoiceItems(WEEKDAY_ITEMS, null, new DialogInterface.OnMultiChoiceClickListener() {
 
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 if (isChecked) {
-                    weekdayList.add(weekdayItems[which]);
-                } else if (weekdayList.contains(weekdayItems[which])) {
-                    weekdayList.remove(weekdayItems[which]);
+                    weekdayList.add(WEEKDAY_ITEMS[which]);
+                } else if (weekdayList.contains(WEEKDAY_ITEMS[which])) {
+                    weekdayList.remove(WEEKDAY_ITEMS[which]);
                 }
             }
         })
