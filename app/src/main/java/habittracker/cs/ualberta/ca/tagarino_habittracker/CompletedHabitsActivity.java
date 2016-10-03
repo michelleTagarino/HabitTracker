@@ -18,8 +18,10 @@ import java.util.Date;
 
 public class CompletedHabitsActivity extends MainActivity {
 
-    ArrayList<Habit> list;
-    ArrayAdapter<Habit> habitAdapter;
+    private ListView listView;
+    private Collection<Habit> habits;
+    private ArrayList<Habit> list;
+    private ArrayAdapter<Habit> habitAdapter;
     private String habitInfo = null;
 
     @Override
@@ -28,9 +30,9 @@ public class CompletedHabitsActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.completed_habits);
 
-        ListView listView = (ListView) findViewById(R.id.completedhabitsListView);
+        listView = (ListView) findViewById(R.id.completedhabitsListView);
 
-        Collection<Habit> habits = HabitListController.getHabitList().getHabits();
+        habits = HabitListController.getHabitList().getHabits();
 
         list = new ArrayList<>(habits);
 
@@ -87,8 +89,9 @@ public class CompletedHabitsActivity extends MainActivity {
                 formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String strDate = formatter.format(habitDate);
 
+                // Get the first 3 letters of the weekday the habit was completed
                 weekFormatter = new SimpleDateFormat("EEE");
-                String strWeekday = formatter.format(habitDate);
+                String strWeekday = weekFormatter.format(habitDate);
 
                 // Convert the string array into a comma separated string
                 String habitDay = habit.getWeekday().toString();
@@ -103,16 +106,17 @@ public class CompletedHabitsActivity extends MainActivity {
                         + "\n\nTimes Completed: " + habitCount
                         + "\n\nLast Weekday Completed: " + strWeekday;
 
+                // This long string should display all the attributes of the habit invoked
                 adb.setMessage(habitInfo);
 
                 adb.setCancelable(true);
-
+                // Add Cancel button to exit the dialog box
                 adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
-
+                // Add Delete button to delete habit
                 adb.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -121,7 +125,7 @@ public class CompletedHabitsActivity extends MainActivity {
                         HabitListController.getHabitList().deleteHabit(habit);
                     }
                 });
-
+                // Add Complete Again button to increment habit completions
                 adb.setPositiveButton("Complete Again", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

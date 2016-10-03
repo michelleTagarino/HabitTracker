@@ -38,8 +38,8 @@ public class HabitListActivity extends MainActivity {
 
     private ArrayList<String> weekdayList;
     final String[] weekdayItems = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-    String adbMessage = "Choose MORE... to Complete Habit";
-    String habitInfo = null;
+    private String adbMessage = "Choose MORE... to Complete Habit";
+    private String habitInfo = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class HabitListActivity extends MainActivity {
 
         listView.setAdapter(habitAdapter);
 
+        // This listener should update the ListView with new habits added
         HabitListController.getHabitList().addListener(new Listener() {
             @Override
             public void update() {
@@ -80,6 +81,7 @@ public class HabitListActivity extends MainActivity {
                 adb.setCancelable(true);
                 final int finalPosition = position;
 
+                // Add Delete button to delete the habit invoked
                 adb.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -87,17 +89,15 @@ public class HabitListActivity extends MainActivity {
                         HabitListController.getHabitList().deleteHabit(habit);
                     }
                 });
-
+                // Add Cancel button to exit the dialog box
                 adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {}
                 });
-
+                // Add More... button to view the habit's stats and the option to complete it
                 adb.setPositiveButton("More...", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        Toast.makeText(HabitListActivity.this, "Pressed More...", Toast.LENGTH_SHORT).show();
 
                         AlertDialog.Builder adb = new AlertDialog.Builder(HabitListActivity.this);
 
@@ -120,7 +120,7 @@ public class HabitListActivity extends MainActivity {
                         String regex = "\\[|\\]";
                         String strHabitDay = habitDay.replaceAll(regex,"").replaceAll(",",", ");
 
-                        int habitCount   = habit.getCountCompleted();
+                        int habitCount = habit.getCountCompleted();
 
                         habitInfo = "Habit Name: "+habitName
                                 + "\n\nDate Created: "+strDate
